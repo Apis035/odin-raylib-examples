@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run file",
+            "type": "shell",
+            "command": "odin run",
+            "args": [
+                "${file}",
+                "-file",
+                "-out:bin\\${fileBasenameNoExtension}.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
