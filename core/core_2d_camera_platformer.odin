@@ -232,9 +232,9 @@ UpdateCameraEvenOutOnLanding :: proc(camera: ^rl.Camera2D, player: ^Player, envI
 }
 
 UpdateCameraPlayerBoundsPush :: proc(camera: ^rl.Camera2D, player: ^Player, envItems: []EnvItem, delta: f32, width, height: i32) {
-    @(static) bbox: Vector2 = {0.2, 0.2}
-
     using rl
+
+    @(static) bbox: Vector2 = {0.2, 0.2}
 
     fw := f32(width)
     fh := f32(height)
