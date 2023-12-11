@@ -27,7 +27,7 @@ main :: proc() {
 
     colorRecs: [MAX_COLORS_COUNT]Rectangle
 
-    for i := 0; i < MAX_COLORS_COUNT; i += 1 {
+    for i in 0..<MAX_COLORS_COUNT {
         colorRecs[i].x = f32(20 + 100 * (i%7) + 10 * (i%7))
         colorRecs[i].y = f32(80 + 100 * (i/7) + 10 * (i/7))
         colorRecs[i].width = 100
@@ -46,7 +46,7 @@ main :: proc() {
     for !WindowShouldClose() {
         mousePoint = GetMousePosition()
 
-        for i := 0; i < MAX_COLORS_COUNT; i += 1 {
+        for i in 0..<MAX_COLORS_COUNT {
             if CheckCollisionPointRec(mousePoint, colorRecs[i]) {
                 colorState[i] = .HOVER
             } else {
@@ -63,7 +63,7 @@ main :: proc() {
             DrawText("raylib colors palette", 28, 42, 20, BLACK)
             DrawText("press SPACE to see all colors", GetScreenWidth() - 180, GetScreenHeight() - 40, 10, GRAY)
 
-            for i := 0; i < MAX_COLORS_COUNT; i += 1 {
+            for i in 0..<MAX_COLORS_COUNT {
                 DrawRectangleRec(colorRecs[i], Fade(colors[i], colorState[i] == .DEFAULT ? 0.6 : 1))
 
                 if IsKeyDown(.SPACE) || colorState[i] == .HOVER {

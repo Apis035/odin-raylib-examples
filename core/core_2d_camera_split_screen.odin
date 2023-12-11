@@ -61,16 +61,16 @@ main :: proc() {
                 BeginMode2D(camera1)
                 defer EndMode2D()
 
-                for i := 0; i < screenWidth/PLAYER_SIZE + 1; i += 1 {
+                for i in 0..<screenWidth/PLAYER_SIZE + 1 {
                     DrawLineV({f32(PLAYER_SIZE*i), 0}, {f32(PLAYER_SIZE*i), f32(screenHeight)}, LIGHTGRAY)
                 }
 
-                for i := 0; i < screenHeight/PLAYER_SIZE + 1; i += 1 {
+                for i in 0..<screenHeight/PLAYER_SIZE + 1 {
                     DrawLineV({0, f32(PLAYER_SIZE*i)}, {f32(screenWidth), f32(PLAYER_SIZE*i)}, LIGHTGRAY)
                 }
 
-                for i := 0; i < screenWidth/PLAYER_SIZE; i += 1 {
-                    for j := 0; j < screenHeight/PLAYER_SIZE; j += 1 {
+                for i in 0..<screenWidth/PLAYER_SIZE {
+                    for j in 0..<screenHeight/PLAYER_SIZE {
                         DrawText(TextFormat("[%i,%i]", i, j), i32(10 + PLAYER_SIZE*i), i32(15 + PLAYER_SIZE*j), 10, LIGHTGRAY)
                     }
                 }
@@ -93,16 +93,16 @@ main :: proc() {
                 BeginMode2D(camera2)
                 defer EndMode2D()
 
-                for i := 0; i < screenWidth/PLAYER_SIZE + 1; i += 1 {
+                for i in 0..<screenWidth/PLAYER_SIZE + 1 {
                     DrawLineV({f32(PLAYER_SIZE*i), 0}, {f32(PLAYER_SIZE*i), f32(screenHeight)}, LIGHTGRAY)
                 }
 
-                for i := 0; i < screenHeight/PLAYER_SIZE + 1; i += 1 {
+                for i in 0..<screenHeight/PLAYER_SIZE + 1 {
                     DrawLineV({0, f32(PLAYER_SIZE*i)}, {f32(screenWidth), f32(PLAYER_SIZE*i)}, LIGHTGRAY)
                 }
 
-                for i := 0; i < screenWidth/PLAYER_SIZE; i += 1 {
-                    for j := 0; j < screenHeight/PLAYER_SIZE; j += 1 {
+                for i in 0..<screenWidth/PLAYER_SIZE {
+                    for j in 0..<screenHeight/PLAYER_SIZE {
                         DrawText(TextFormat("[%i,%i]", i, j), i32(10 + PLAYER_SIZE*i), i32(15 + PLAYER_SIZE*j), 10, LIGHTGRAY)
                     }
                 }

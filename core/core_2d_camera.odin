@@ -19,7 +19,7 @@ main :: proc() {
 
     spacing: i32
 
-    for i := 0; i < MAX_BUILDINGS; i += 1 {
+    for i in 0..<MAX_BUILDINGS {
         buildings[i].width  = f32(GetRandomValue(50, 200))
         buildings[i].height = f32(GetRandomValue(100, 800))
         buildings[i].y      = f32(screenHeight) - 130 - buildings[i].height
@@ -74,7 +74,7 @@ main :: proc() {
 
                 DrawRectangle(-6000, 320, 13000, 8000, DARKGRAY)
 
-                for i := 0; i < MAX_BUILDINGS; i += 1 {
+                for i in 0..<MAX_BUILDINGS {
                     DrawRectangleRec(buildings[i], buildColors[i])
                 }
 

@@ -22,7 +22,7 @@ main :: proc() {
     SetTextureFilter(target.texture, .BILINEAR)
 
     colors: [10]Color
-    for i := 0; i < 10; i += 1 {
+    for i in 0..<10 {
         colors[i] = {u8(GetRandomValue(100, 250)), u8(GetRandomValue(50, 150)), u8(GetRandomValue(10, 100)), 255}
     }
 
@@ -32,7 +32,7 @@ main :: proc() {
         scale: f32 = min(f32(GetScreenWidth())/f32(gameScreenWidth), f32(GetScreenHeight())/f32(gameScreenHeight))
 
         if IsKeyPressed(.SPACE) {
-            for i := 0; i < 10; i += 1 {
+            for i in 0..<10 {
                 colors[i] = {u8(GetRandomValue(100, 250)), u8(GetRandomValue(50, 150)), u8(GetRandomValue(10, 100)), 255}
             }
         }
@@ -49,7 +49,7 @@ main :: proc() {
 
             ClearBackground(RAYWHITE)
 
-            for i := 0; i < 10; i += 1 {
+            for i in 0..<10 {
                 DrawRectangle(0, (gameScreenHeight/10) * i32(i), gameScreenWidth, gameScreenHeight/10, colors[i])
             }
 
