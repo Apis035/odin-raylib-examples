@@ -11,7 +11,7 @@ if "%1" == "clean" (
 )
 
 set opt=minimal
-set flags=-disable-assert -no-bounds-check -no-thread-local
+set flags=-disable-assert -no-bounds-check -subsystem:windows
 
 if not "%1" == "" set opt=%1
 
