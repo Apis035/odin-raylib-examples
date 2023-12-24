@@ -8,7 +8,7 @@
             "args": [
                 "${file}",
                 "-file",
-                "-out:bin\\${fileBasenameNoExtension}.exe"
+                "-out:${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "group": {
                 "kind": "build",

@@ -42,7 +42,7 @@ goto ParseArgs
         for %%F in (%%D\*.odin) do (
             echo ^> %%~nxF
 
-            odin build %%F -file -out:bin\%%~nF.exe -o:%opt% %flags%
+            odin build %%F -file -out:%%~pnF.exe -o:%opt% %flags%
             echo off
             if defined pack upx -qqq --lzma bin\%%~nF.exe
         )
