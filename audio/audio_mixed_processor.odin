@@ -56,8 +56,6 @@ main :: proc() {
     for !WindowShouldClose() {
         UpdateMusicStream(music)
 
-        TraceLog(.WARNING, TextFormat("%f", averageVolume[399]))
-
         if IsKeyPressed(.LEFT)  do exponent -= 0.05
         if IsKeyPressed(.RIGHT) do exponent += 0.05
 
