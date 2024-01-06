@@ -77,4 +77,4 @@ goto ParseArgs
 
 :Clean
     echo Cleaning output files...
-    del /s *.exe
+    del /s *.exe *.obj
