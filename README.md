@@ -15,11 +15,11 @@ Execute `build.bat` file. You can supply additional parameter to change compilat
 - Clean output files: `clean`
 
 Example:
-```batch
-build               %= build all examples =%
-build speed         %= build with speed optimization =%
-build none lld      %= build with no optimization, use LLD linker =%
-build size upx      %= build optimized for size, compress with upx =%
+```ps
+build               # build all examples
+build speed         # build with speed optimization
+build none lld      # build with no optimization, use LLD linker
+build size upx      # build optimized for size, compress with upx
 ```
 
 [UPX](https://upx.github.io/) needs to be callable from enviroment variable for compressing with `upx` flag.
