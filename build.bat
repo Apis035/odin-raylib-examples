@@ -1,6 +1,6 @@
 :: Build flags:
 ::     none minimal speed size aggressive
-::     upx bin clean
+::     upx lld clean
 
 :: FIXME:
 :: - Odin modifying command echoing setting
@@ -12,6 +12,7 @@
 
 set opt=minimal
 set pack=
+set lld=
 set flags=-disable-assert -no-bounds-check -subsystem:windows
 
 
@@ -22,6 +23,7 @@ set flags=-disable-assert -no-bounds-check -subsystem:windows
 
     for %%A in (none, minimal, speed, size, aggressive) do if %arg% == %%A set opt=%arg%
     if %arg% == upx set pack=1
+    if %arg% == lld set lld=-lld
 
     shift
 goto ParseArgs
@@ -33,7 +35,12 @@ goto ParseArgs
     echo.
     echo Compiling examples...
     echo     Optimization: %opt%
-    echo     UPX packing:  %upxmsg%
+    if defined pack (
+    echo     UPX packing enabled
+    )
+    if defined lld (
+    echo     Using LLD linker
+    )
     echo.
 
     if not exist bin md bin
@@ -42,7 +49,7 @@ goto ParseArgs
         for %%F in (%%D\*.odin) do (
             echo ^> %%~nxF
 
-            odin build %%F -file -out:%%~pnF.exe -o:%opt% %flags%
+            odin build %%F -file -out:%%~pnF.exe -o:%opt% %lld% %flags%
             echo off
             if defined pack upx -qqq --lzma bin\%%~nF.exe
         )
