@@ -1,6 +1,10 @@
+// odin run rlgl_compute_shader.odin -file -debug -strict-style -max-error-count=3 -define:RAYLIB_SHARED=true
+// This program simulates Conways "Game Of Life" in compute shaders.
+// As of raylib v5.5 compute shaders require a Raylib rebuild for OpenGL 4.3 support! You need your own raylib.dll here.
 package others
 
 import "vendor:raylib"
+import rlgl "vendor:raylib/rlgl"
 
 // raylib need to be build with opengl 4.3 for this to work
 
@@ -27,9 +31,9 @@ main :: proc() {
     brushSize: u32 = 8
 
     golLogicCode    := LoadFileText("resources/shaders/glsl430/gol.glsl")
-    golLogicShader  := rlCompileShader(cstring(golLogicCode), RL_COMPUTE_SHADER)
-    golLogicProgram := rlLoadComputeShaderProgram(golLogicShader)
-    defer rlUnloadShaderProgram(golLogicProgram)
+    golLogicShader  := rlgl.CompileShader(cstring(golLogicCode), rlgl.COMPUTE_SHADER)
+    golLogicProgram := rlgl.LoadComputeShaderProgram(golLogicShader)
+    defer rlgl.UnloadShaderProgram(golLogicProgram)
     UnloadFileText(golLogicCode)
 
     golRenderShader := LoadShader(nil, "resources/shaders/glsl430/gol_render.glsl")
@@ -37,18 +41,18 @@ main :: proc() {
     defer UnloadShader(golRenderShader)
 
     golTransfertCode    := LoadFileText("resources/shaders/glsl430/gol_transfert.glsl")
-    golTransfertShader  := rlCompileShader(cstring(golTransfertCode), RL_COMPUTE_SHADER)
-    golTransfertProgram := rlLoadComputeShaderProgram(golTransfertShader)
-    defer rlUnloadShaderProgram(golTransfertProgram)
+    golTransfertShader  := rlgl.CompileShader(cstring(golTransfertCode), rlgl.COMPUTE_SHADER)
+    golTransfertProgram := rlgl.LoadComputeShaderProgram(golTransfertShader)
+    defer rlgl.UnloadShaderProgram(golTransfertProgram)
     UnloadFileText(golTransfertCode)
 
-    ssboA := rlLoadShaderBuffer(GOL_WIDTH*GOL_WIDTH*size_of(u32), nil, RL_DYNAMIC_COPY)
-    ssboB := rlLoadShaderBuffer(GOL_WIDTH*GOL_WIDTH*size_of(u32), nil, RL_DYNAMIC_COPY)
-    ssboTransfert := rlLoadShaderBuffer(size_of(GolUpdateSSBO), nil, RL_DYNAMIC_COPY)
+    ssboA := rlgl.LoadShaderBuffer(GOL_WIDTH*GOL_WIDTH*size_of(u32), nil, rlgl.DYNAMIC_COPY)
+    ssboB := rlgl.LoadShaderBuffer(GOL_WIDTH*GOL_WIDTH*size_of(u32), nil, rlgl.DYNAMIC_COPY)
+    ssboTransfert := rlgl.LoadShaderBuffer(size_of(GolUpdateSSBO), nil, rlgl.DYNAMIC_COPY)
     defer {
-        rlUnloadShaderBuffer(ssboA)
-        rlUnloadShaderBuffer(ssboB)
-        rlUnloadShaderBuffer(ssboTransfert)
+        rlgl.UnloadShaderBuffer(ssboA)
+        rlgl.UnloadShaderBuffer(ssboB)
+        rlgl.UnloadShaderBuffer(ssboTransfert)
     }
 
     transfertBuffer: GolUpdateSSBO
@@ -68,26 +72,26 @@ main :: proc() {
             transfertBuffer.commands[transfertBuffer.count].enabled = IsMouseButtonDown(.LEFT)
             transfertBuffer.count += 1
         } else if transfertBuffer.count > 0 {
-            rlUpdateShaderBuffer(ssboTransfert, &transfertBuffer, size_of(GolUpdateSSBO), 0)
+            rlgl.UpdateShaderBuffer(ssboTransfert, &transfertBuffer, size_of(GolUpdateSSBO), 0)
 
-            rlEnableShader(golTransfertProgram)
-            rlBindShaderBuffer(ssboA, 1)
-            rlBindShaderBuffer(ssboTransfert, 3)
-            rlComputeShaderDispatch(transfertBuffer.count, 1, 1)
-            rlDisableShader()
+            rlgl.EnableShader(golTransfertProgram)
+            rlgl.BindShaderBuffer(ssboA, 1)
+            rlgl.BindShaderBuffer(ssboTransfert, 3)
+            rlgl.ComputeShaderDispatch(transfertBuffer.count, 1, 1)
+            rlgl.DisableShader()
 
             transfertBuffer.count = 0
         } else {
-            rlEnableShader(golLogicProgram)
-            rlBindShaderBuffer(ssboA, 1)
-            rlBindShaderBuffer(ssboB, 2)
-            rlComputeShaderDispatch(GOL_WIDTH/16, GOL_WIDTH/16, 1)
-            rlDisableShader()
+            rlgl.EnableShader(golLogicProgram)
+            rlgl.BindShaderBuffer(ssboA, 1)
+            rlgl.BindShaderBuffer(ssboB, 2)
+            rlgl.ComputeShaderDispatch(GOL_WIDTH/16, GOL_WIDTH/16, 1)
+            rlgl.DisableShader()
 
             ssboA, ssboB = ssboB, ssboA
         }
 
-        rlBindShaderBuffer(ssboA, 1)
+        rlgl.BindShaderBuffer(ssboA, 1)
         SetShaderValue(golRenderShader, resUniformLoc, &resolution, .VEC2)
 
         {
