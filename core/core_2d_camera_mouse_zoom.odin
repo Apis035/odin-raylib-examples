@@ -1,6 +1,7 @@
 package core
 
 import "vendor:raylib"
+import "vendor:raylib/rlgl"
 import "core:math/linalg"
 
 main :: proc() {
@@ -48,11 +49,11 @@ main :: proc() {
                 BeginMode2D(camera)
                 defer EndMode2D()
 
-                rlPushMatrix()
-                    rlTranslatef(0, 25*50, 0)
-                    rlRotatef(90, 1, 0, 0)
+                rlgl.PushMatrix()
+                    rlgl.Translatef(0, 25*50, 0)
+                    rlgl.Rotatef(90, 1, 0, 0)
                     DrawGrid(100, 50)
-                rlPopMatrix()
+                rlgl.PopMatrix()
 
                 DrawCircle(100, 100, 50, YELLOW)
             }

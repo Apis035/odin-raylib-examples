@@ -18,7 +18,6 @@ main :: proc() {
         vResolution = 1200,
         hScreenSize = 0.133793,
         vScreenSize = 0.069,
-        vScreenCenter = 0.04678,
         eyeToScreenDistance = 0.041,
         lensSeparationDistance = 0.07,
         interpupillaryDistance = 0.07,

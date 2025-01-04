@@ -28,17 +28,17 @@ main :: proc() {
             }
 
         case .TITLE:
-            if IsKeyPressed(.ENTER) { // || IsGestureDetected(.TAP)
+            if IsKeyPressed(.ENTER) || IsGestureDetected(.TAP) {
                 currentScreen = .GAMEPLAY
             }
 
         case .GAMEPLAY:
-            if IsKeyPressed(.ENTER) { // || IsGestureDetected(.TAP)
+            if IsKeyPressed(.ENTER) || IsGestureDetected(.TAP) {
                 currentScreen = .ENDING
             }
 
         case .ENDING:
-            if IsKeyPressed(.ENTER) { // || IsGestureDetected(.TAP)
+            if IsKeyPressed(.ENTER) || IsGestureDetected(.TAP) {
                 currentScreen = .TITLE
             }
         }
