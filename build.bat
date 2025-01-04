@@ -1,14 +1,9 @@
-:: Build flags:
-::     none minimal speed size aggressive
-::     upx lld check clean
-
-:: FIXME:
-:: - Odin modifying command echoing setting
 :: TODO:
 :: - Option to compile only specific example module
-:: - Help message
 
 @echo off
+
+setlocal EnableDelayedExpansion
 
 set opt=minimal
 set pack=
@@ -19,6 +14,9 @@ set flags=-disable-assert -no-bounds-check -subsystem:windows
 :ParseArgs
     set arg=%1
     if "%arg%" == "" goto Build
+    if "%arg%" == "help" goto Help
+    if "%arg%" == "/?" goto Help
+    if "%arg%" == "-h" goto Help
     if "%arg%" == "check" goto Check
     if "%arg%" == "clean" goto Clean
 
@@ -44,20 +42,36 @@ goto ParseArgs
     )
     echo.
 
-    if not exist bin md bin
-
     for /d %%D in (*) do (
         for %%F in (%%D\*.odin) do (
             echo ^> %%~nxF
 
             odin build %%F -file -out:%%~pnF.exe -o:%opt% %lld% %flags%
-            echo off
-            if defined pack upx -qqq --lzma bin\%%~nF.exe
+            if defined pack upx -qqq --lzma %%~pnF.exe
         )
     )
+goto :eof
 
-    goto :eof
 
+:Help
+    echo %~0 [options...]
+    echo.
+    echo Options:
+    echo     none, minimal, speed, size, aggressive
+    echo         Set Odin compiler optimization mode.
+    echo.
+    echo     upx
+    echo         Compress resulting executable with UPX.
+    echo.
+    echo     lld
+    echo         Use LLD linker for linking.
+    echo.
+    echo     check
+    echo         Run `odin check` on all files.
+    echo.
+    echo     clean
+    echo         Clean all compiled files.
+goto :eof
 
 :Check
     echo.
@@ -71,10 +85,10 @@ goto ParseArgs
             echo off
         )
     )
-
-    goto :eof
+goto :eof
 
 
 :Clean
     echo Cleaning output files...
     del /s *.exe *.obj
+goto :eof
