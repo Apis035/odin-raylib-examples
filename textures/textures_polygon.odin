@@ -1,6 +1,7 @@
 package textures
 
 import "vendor:raylib"
+import "vendor:raylib/rlgl"
 import "core:math"
 import "core:math/linalg"
 
@@ -71,39 +72,26 @@ DrawTexturePoly :: proc(texture: raylib.Texture2D,
                         pointCount: i32, tint: raylib.Color) {
     using raylib
 
-    rlSetTexture(texture.id)
+    rlgl.SetTexture(texture.id)
     {
-        rlBegin(RL_QUADS)
+        rlgl.Begin(rlgl.QUADS)
 
-        rlColor4ub(tint.r, tint.g, tint.b, tint.a)
+        rlgl.Color4ub(tint.r, tint.g, tint.b, tint.a)
 
         for i in 0..<pointCount-1 {
-            rlTexCoord2f(0.5, 0.5)
-            rlVertex2f(center.x, center.y)
+            rlgl.TexCoord2f(0.5, 0.5)
+            rlgl.Vertex2f(center.x, center.y)
 
-            rlTexCoord2f(texcoords[i].x, texcoords[i].y)
-            rlVertex2f(points[i].x + center.x, points[i].y + center.y)
+            rlgl.TexCoord2f(texcoords[i].x, texcoords[i].y)
+            rlgl.Vertex2f(points[i].x + center.x, points[i].y + center.y)
 
-            rlTexCoord2f(texcoords[i+1].x, texcoords[i+1].y)
-            rlVertex2f(points[i+1].x + center.x, points[i+1].y + center.y)
+            rlgl.TexCoord2f(texcoords[i+1].x, texcoords[i+1].y)
+            rlgl.Vertex2f(points[i+1].x + center.x, points[i+1].y + center.y)
 
-            rlTexCoord2f(texcoords[i+1].x, texcoords[i+1].y)
-            rlVertex2f(points[i+1].x + center.x, points[i+1].y + center.y)
+            rlgl.TexCoord2f(texcoords[i+1].x, texcoords[i+1].y)
+            rlgl.Vertex2f(points[i+1].x + center.x, points[i+1].y + center.y)
         }
-        rlEnd()
+        rlgl.End()
     }
-    rlSetTexture(0)
-}
-
-// temporary solution, i don't know which odin proc rotates a vector2
-Vector2Rotate :: proc(v: raylib.Vector2, angle: f32) -> (result: raylib.Vector2) {
-    cosres := math.cos(angle)
-    sinres := math.sin(angle)
-
-    result = {
-        v.x*cosres - v.y*sinres,
-        v.x*sinres + v.y*cosres,
-    }
-
-    return result
+    rlgl.SetTexture(0)
 }

@@ -41,7 +41,7 @@ main :: proc() {
 
         if IsMouseButtonPressed(.LEFT) {
             if !collision.hit {
-                ray = GetMouseRay(GetMousePosition(), camera)
+                ray = GetScreenToWorldRay(GetMousePosition(), camera)
 
                 collision = GetRayCollisionBox(ray, {
                     {cubePosition.x - cubeSize.x/2, cubePosition.y - cubeSize.y/2, cubePosition.z - cubeSize.z/2},
