@@ -38,15 +38,15 @@ main :: proc() {
     SetTargetFPS(60)
 
     for !WindowShouldClose() {
-        if IsKeyDown(.S) do player1.y += 3
-        if IsKeyDown(.W) do player1.y -= 3
-        if IsKeyDown(.D) do player1.x += 3
-        if IsKeyDown(.A) do player1.x -= 3
+        if IsKeyDown(.S) { player1.y += 3 }
+        if IsKeyDown(.W) { player1.y -= 3 }
+        if IsKeyDown(.D) { player1.x += 3 }
+        if IsKeyDown(.A) { player1.x -= 3 }
 
-        if IsKeyDown(.DOWN)  do player2.y += 3
-        if IsKeyDown(.UP)    do player2.y -= 3
-        if IsKeyDown(.RIGHT) do player2.x += 3
-        if IsKeyDown(.LEFT)  do player2.x -= 3
+        if IsKeyDown(.DOWN)  { player2.y += 3 }
+        if IsKeyDown(.UP)    { player2.y -= 3 }
+        if IsKeyDown(.RIGHT) { player2.x += 3 }
+        if IsKeyDown(.LEFT)  { player2.x -= 3 }
 
         camera1.target = {player1.x, player1.y}
         camera2.target = {player2.x, player2.y}

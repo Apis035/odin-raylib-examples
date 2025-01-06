@@ -104,7 +104,9 @@ main :: proc() {
     SetTargetFPS(60)
 
     for !WindowShouldClose() {
-        if IsKeyPressed(.T) do boundedT = !boundedT
+        if IsKeyPressed(.T) {
+            boundedT = !boundedT
+        }
 
         if IsKeyPressed(.RIGHT) {
             easingX = wrap(easingX + EasingTypes(1), min(EasingTypes), max(EasingTypes))
@@ -122,11 +124,11 @@ main :: proc() {
             easingY = wrap(easingY - EasingTypes(1), min(EasingTypes), max(EasingTypes))
         }
 
-        if IsKeyPressed(.W) && d < D_MAX - D_STEP do d += D_STEP
-        if IsKeyPressed(.Q) && d > D_MIN - D_STEP do d -= D_STEP
+        if IsKeyPressed(.W) && d < D_MAX - D_STEP { d += D_STEP }
+        if IsKeyPressed(.Q) && d > D_MIN - D_STEP { d -= D_STEP }
 
-        if IsKeyDown(.S) && d < D_MAX - D_STEP_FINE do d += D_STEP_FINE
-        if IsKeyDown(.A) && d > D_MIN + D_STEP_FINE do d -= D_STEP_FINE
+        if IsKeyDown(.S) && d < D_MAX - D_STEP_FINE { d += D_STEP_FINE }
+        if IsKeyDown(.A) && d > D_MIN + D_STEP_FINE { d -= D_STEP_FINE }
 
         if IsKeyPressed(.SPACE) || IsKeyPressed(.T) ||
                 IsKeyPressed(.RIGHT) || IsKeyPressed(.LEFT) ||
@@ -139,7 +141,9 @@ main :: proc() {
             paused = true
         }
 
-        if IsKeyPressed(.ENTER) do paused = !paused
+        if IsKeyPressed(.ENTER) {
+            paused = !paused
+        }
 
         if !paused && ((boundedT && t < d) || !boundedT) {
             ballPosition = {
@@ -170,7 +174,7 @@ main :: proc() {
 }
 
 wrap :: proc(value, minimum, maximum: $T) -> T {
-    if value < minimum do return maximum
-    if value > maximum do return minimum
+    if value < minimum { return maximum }
+    if value > maximum { return minimum }
     return value
 }

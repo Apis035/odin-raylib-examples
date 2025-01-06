@@ -44,7 +44,9 @@ main :: proc() {
 
         timePlayed = GetMusicTimePlayed(music) / GetMusicTimeLength(music)
 
-        if timePlayed > 1 do timePlayed = 1
+        if timePlayed > 1 {
+            timePlayed = 1
+        }
 
         {
             BeginDrawing()

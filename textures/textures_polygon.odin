@@ -2,8 +2,6 @@ package textures
 
 import "vendor:raylib"
 import "vendor:raylib/rlgl"
-import "core:math"
-import "core:math/linalg"
 
 MAX_POINTS :: 11
 

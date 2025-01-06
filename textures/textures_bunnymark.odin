@@ -33,7 +33,7 @@ main :: proc() {
 
     for !WindowShouldClose() {
         if IsMouseButtonDown(.LEFT) {
-            for i in 0..<100 {
+            for _ in 0..<100 {
                 if bunniesCount < MAX_BUNNIES {
                     bunnies[bunniesCount].position = GetMousePosition()
                     bunnies[bunniesCount].speed.x  = f32(GetRandomValue(-250, 250))/60

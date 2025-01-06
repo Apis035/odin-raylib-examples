@@ -90,18 +90,20 @@ main :: proc() {
             oldFrequency = frequency
         }
 
-        BeginDrawing()
-        defer EndDrawing()
+        {
+            BeginDrawing()
+            defer EndDrawing()
 
-        ClearBackground(RAYWHITE)
-        DrawText(TextFormat("sine frequency: %i", i32(frequency)), GetScreenWidth() - 220, 10, 20, RED)
-        DrawText("click mouse button to change frequency or pan", 10, 10, 20, DARKGRAY)
+            ClearBackground(RAYWHITE)
+            DrawText(TextFormat("sine frequency: %i", i32(frequency)), GetScreenWidth() - 220, 10, 20, RED)
+            DrawText("click mouse button to change frequency or pan", 10, 10, 20, DARKGRAY)
 
-        for i in 0..<screenWidth {
-            position.x = f32(i)
-            position.y = 250 + 50 * f32(data[i*MAX_SAMPLES/screenWidth])/32000
+            for i in 0..<screenWidth {
+                position.x = f32(i)
+                position.y = 250 + 50 * f32(data[i*MAX_SAMPLES/screenWidth])/32000
 
-            DrawPixelV(position, RED)
+                DrawPixelV(position, RED)
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ main :: proc() {
             UpdateCamera(&camera, .FIRST_PERSON)
         }
 
-        if IsMouseButtonPressed(.RIGHT){
+        if IsMouseButtonPressed(.RIGHT) {
             if IsCursorHidden() {
                 EnableCursor()
             } else {

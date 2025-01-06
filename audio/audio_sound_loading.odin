@@ -22,15 +22,17 @@ main :: proc() {
     SetTargetFPS(60)
 
     for !WindowShouldClose() {
-        if IsKeyPressed(.SPACE) do PlaySound(fxWav)
-        if IsKeyPressed(.ENTER) do PlaySound(fxOgg)
+        if IsKeyPressed(.SPACE) { PlaySound(fxWav) }
+        if IsKeyPressed(.ENTER) { PlaySound(fxOgg) }
 
-        BeginDrawing()
-        defer EndDrawing()
+        {
+            BeginDrawing()
+            defer EndDrawing()
 
-        ClearBackground(RAYWHITE)
+            ClearBackground(RAYWHITE)
 
-        DrawText("Press SPACE to PLAY the WAV sound!", 200, 180, 20, LIGHTGRAY)
-        DrawText("Press ENTER to PLAY the OGG sound!", 200, 220, 20, LIGHTGRAY)
+            DrawText("Press SPACE to PLAY the WAV sound!", 200, 180, 20, LIGHTGRAY)
+            DrawText("Press ENTER to PLAY the OGG sound!", 200, 220, 20, LIGHTGRAY)
+        }
     }
 }

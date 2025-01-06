@@ -2,7 +2,6 @@ package core
 
 import "vendor:raylib"
 import "vendor:raylib/rlgl"
-import "core:math/linalg"
 
 main :: proc() {
     using raylib

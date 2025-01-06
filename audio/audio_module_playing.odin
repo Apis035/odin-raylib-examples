@@ -87,7 +87,9 @@ main :: proc() {
             circles[i].alpha += circles[i].speed
             circles[i].radius += circles[i].speed * 10
 
-            if circles[i].alpha > 1 do circles[i].speed *= -1
+            if circles[i].alpha > 1 {
+                circles[i].speed *= -1
+            }
 
             if circles[i].alpha <= 0 {
                 circles[i].alpha = 0

@@ -104,13 +104,13 @@ main :: proc() {
                 DrawRectangleRec(playerRect, RED)
             }
 
-            DrawText("Controls:", 20, 20, 10, BLACK);
-            DrawText("- Right/Left to move", 40, 40, 10, DARKGRAY);
-            DrawText("- Space to jump", 40, 60, 10, DARKGRAY);
-            DrawText("- Mouse Wheel to Zoom in-out, R to reset zoom", 40, 80, 10, DARKGRAY);
-            DrawText("- C to change camera mode", 40, 100, 10, DARKGRAY);
-            DrawText("Current camera mode:", 20, 120, 10, BLACK);
-            DrawText(cameraDescriptions[cameraOption], 40, 140, 10, DARKGRAY);
+            DrawText("Controls:", 20, 20, 10, BLACK)
+            DrawText("- Right/Left to move", 40, 40, 10, DARKGRAY)
+            DrawText("- Space to jump", 40, 60, 10, DARKGRAY)
+            DrawText("- Mouse Wheel to Zoom in-out, R to reset zoom", 40, 80, 10, DARKGRAY)
+            DrawText("- C to change camera mode", 40, 100, 10, DARKGRAY)
+            DrawText("Current camera mode:", 20, 120, 10, BLACK)
+            DrawText(cameraDescriptions[cameraOption], 40, 140, 10, DARKGRAY)
         }
     }
 }
@@ -118,8 +118,8 @@ main :: proc() {
 UpdatePlayer :: proc(player: ^Player, envItems: []EnvItem, delta: f32) {
     using rl
 
-    if IsKeyDown(.LEFT)  do player.position.x -= PLAYER_HOR_SPD * delta
-    if IsKeyDown(.RIGHT) do player.position.x += PLAYER_HOR_SPD * delta
+    if IsKeyDown(.LEFT)  { player.position.x -= PLAYER_HOR_SPD * delta }
+    if IsKeyDown(.RIGHT) { player.position.x += PLAYER_HOR_SPD * delta }
     if IsKeyDown(.SPACE) && player.canJump {
         player.speed = -PLAYER_JUMP_SPD
         player.canJump = false
@@ -178,10 +178,10 @@ UpdateCameraCenterInsideMap :: proc(camera: ^rl.Camera2D, player: ^Player, envIt
     fw := f32(width)
     fh := f32(height)
 
-    if posMax.x < fw do camera.offset.x = fw - (posMax.x - fw/2)
-    if posMax.y < fh do camera.offset.y = fh - (posMax.y - fh/2)
-    if posMin.x > 0  do camera.offset.x = fw/2 - posMin.x
-    if posMin.y > 0  do camera.offset.y = fh/2 - posMin.y
+    if posMax.x < fw { camera.offset.x = fw - (posMax.x - fw/2) }
+    if posMax.y < fh { camera.offset.y = fh - (posMax.y - fh/2) }
+    if posMin.x > 0  { camera.offset.x = fw/2 - posMin.x }
+    if posMin.y > 0  { camera.offset.y = fh/2 - posMin.y }
 }
 
 UpdateCameraCenterSmoothFollow :: proc(camera: ^rl.Camera2D, player: ^Player, envItems: []EnvItem, delta: f32, width, height: i32) {
@@ -244,8 +244,8 @@ UpdateCameraPlayerBoundsPush :: proc(camera: ^rl.Camera2D, player: ^Player, envI
 
     camera.offset = {(1-bbox.x) * 0.5 * fw, (1-bbox.y) * 0.5 * fh}
 
-    if player.position.x < bboxWorldMin.x do camera.target.x = player.position.x
-    if player.position.y < bboxWorldMin.y do camera.target.y = player.position.y
-    if player.position.x > bboxWorldMax.x do camera.target.x = bboxWorldMin.x + (player.position.x - bboxWorldMax.x)
-    if player.position.y > bboxWorldMax.y do camera.target.y = bboxWorldMin.y + (player.position.y - bboxWorldMax.y)
+    if player.position.x < bboxWorldMin.x { camera.target.x = player.position.x }
+    if player.position.y < bboxWorldMin.y { camera.target.y = player.position.y }
+    if player.position.x > bboxWorldMax.x { camera.target.x = bboxWorldMin.x + (player.position.x - bboxWorldMax.x) }
+    if player.position.y > bboxWorldMax.y { camera.target.y = bboxWorldMin.y + (player.position.y - bboxWorldMax.y) }
 }

@@ -16,15 +16,17 @@ main :: proc() {
     SetTargetFPS(60)
 
     for !WindowShouldClose() {
-        if IsKeyDown(.RIGHT) do ballPosition.x += 2
-        if IsKeyDown(.LEFT)  do ballPosition.x -= 2
-        if IsKeyDown(.UP)    do ballPosition.y -= 2
-        if IsKeyDown(.DOWN)  do ballPosition.y += 2
+        if IsKeyDown(.RIGHT) { ballPosition.x += 2 }
+        if IsKeyDown(.LEFT)  { ballPosition.x -= 2 }
+        if IsKeyDown(.UP)    { ballPosition.y -= 2 }
+        if IsKeyDown(.DOWN)  { ballPosition.y += 2 }
 
-        BeginDrawing()
-        defer EndDrawing()
-        ClearBackground(RAYWHITE)
-        DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY)
-        DrawCircleV(ballPosition, 50, MAROON)
+        {
+            BeginDrawing()
+            defer EndDrawing()
+            ClearBackground(RAYWHITE)
+            DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY)
+            DrawCircleV(ballPosition, 50, MAROON)
+        }
     }
 }

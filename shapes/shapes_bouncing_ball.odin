@@ -22,12 +22,14 @@ main :: proc() {
     SetTargetFPS(60)
 
     for !WindowShouldClose() {
-        if IsKeyPressed(.SPACE) do pause = !pause
+        if IsKeyPressed(.SPACE) {
+            pause = !pause
+        }
 
         if !pause {
             ballPosition += ballSpeed
-            if ballPosition.x >= f32(GetScreenWidth())  - f32(ballRadius) || ballPosition.x <= f32(ballRadius) do ballSpeed.x *= -1
-            if ballPosition.y >= f32(GetScreenHeight()) - f32(ballRadius) || ballPosition.y <= f32(ballRadius) do ballSpeed.y *= -1
+            if ballPosition.x >= f32(GetScreenWidth())  - f32(ballRadius) || ballPosition.x <= f32(ballRadius) { ballSpeed.x *= -1 }
+            if ballPosition.y >= f32(GetScreenHeight()) - f32(ballRadius) || ballPosition.y <= f32(ballRadius) { ballSpeed.y *= -1 }
         } else {
             framesCounter += 1
         }

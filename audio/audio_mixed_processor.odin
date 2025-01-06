@@ -56,12 +56,14 @@ main :: proc() {
     for !WindowShouldClose() {
         UpdateMusicStream(music)
 
-        if IsKeyPressed(.LEFT)  do exponent -= 0.05
-        if IsKeyPressed(.RIGHT) do exponent += 0.05
+        if IsKeyPressed(.LEFT)  { exponent -= 0.05 }
+        if IsKeyPressed(.RIGHT) { exponent += 0.05 }
 
         exponent = clamp(exponent, 0.5, 3)
 
-        if IsKeyPressed(.SPACE) do PlaySound(sound)
+        if IsKeyPressed(.SPACE) {
+            PlaySound(sound)
+        }
 
         {
             BeginDrawing()

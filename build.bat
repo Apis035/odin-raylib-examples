@@ -81,7 +81,7 @@ goto :eof
         for %%F in (%%D\*.odin) do (
             echo ^> %%~nxF
 
-            odin check %%F -file
+            odin check %%F -file -vet-unused -vet-style -vet-semicolon -disallow-do -terse-errors
             echo off
         )
     )

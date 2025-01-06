@@ -26,9 +26,13 @@ main :: proc() {
     SetTargetFPS(60)
 
     for !WindowShouldClose() {
-        if !pause do boxA.x += boxASpeedX
+        if !pause {
+            boxA.x += boxASpeedX
+        }
 
-        if (boxA.x + boxA.width >= f32(GetScreenWidth())) || (boxA.x <= 0) do boxASpeedX *= -1
+        if (boxA.x + boxA.width >= f32(GetScreenWidth())) || (boxA.x <= 0) {
+            boxASpeedX *= -1
+        }
 
         boxB.x = f32(GetMouseX()) - boxB.width/2
         boxB.y = f32(GetMouseY()) - boxB.height/2
@@ -38,9 +42,13 @@ main :: proc() {
 
         collision = CheckCollisionRecs(boxA, boxB)
 
-        if collision do boxCollision = GetCollisionRec(boxA, boxB)
+        if collision {
+            boxCollision = GetCollisionRec(boxA, boxB)
+        }
 
-        if IsKeyPressed(.SPACE) do pause = !pause
+        if IsKeyPressed(.SPACE) {
+            pause = !pause
+        }
 
         {
             BeginDrawing()

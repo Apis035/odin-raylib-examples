@@ -133,7 +133,7 @@ main :: proc() {
 
             DrawText(TextFormat("Screen Size: [%i, %i]", GetScreenWidth(), GetScreenHeight()), 10, 40, 10, GREEN)
 
-            DrawText("Following flags can be set after window creation:", 10, 60, 10, GRAY);
+            DrawText("Following flags can be set after window creation:", 10, 60, 10, GRAY)
             if IsWindowState({.FULLSCREEN_MODE}) {
                 DrawText("[F] FLAG_FULLSCREEN_MODE: on", 10, 80, 10, LIME)
             } else {

@@ -16,7 +16,9 @@ main :: proc() {
     SetTargetFPS(60)
 
     for !WindowShouldClose() {
-        if IsKeyPressed(.S) do scissorMode = !scissorMode
+        if IsKeyPressed(.S) {
+            scissorMode = !scissorMode
+        }
 
         scissorArea.x = f32(GetMouseX()) - scissorArea.width/2
         scissorArea.y = f32(GetMouseY()) - scissorArea.height/2
@@ -34,7 +36,9 @@ main :: proc() {
             DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), RED)
             DrawText("Move the mouse around to reveal this text!", 190, 200, 20, BLACK)
 
-            if scissorMode do EndScissorMode()
+            if scissorMode {
+                EndScissorMode()
+            }
 
             DrawRectangleLinesEx(scissorArea, 1, BLACK)
             DrawText("Press S to toggle scissor text", 10, 10, 20, BLACK)
